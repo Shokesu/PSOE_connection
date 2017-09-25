@@ -18,3 +18,23 @@
     - Gráfico que visualiza las fuentes de información externas más referenciadas en estos tweets.
     - Gráfico igual que el anterior, solo que los tweets se agregan por candidato.
 
+
+
+
+Como muestra,  aqui están los resultados de la visualización de los tweets (usando 433 tweets pero descartando retweets):
+
+
+![Alt text](/images/grafico1.png?raw=true "Optional Title")
+
+
+![Alt text](/images/grafico2.png?raw=true "Optional Title")
+
+
+![Alt text](/images/grafico3.png?raw=true "Optional Title")
+
+
+![Alt text](/images/grafico4.png?raw=true "Optional Title")
+
+
+
+![Alt text](/images/grafico5.png?raw=true "Optional Title")
