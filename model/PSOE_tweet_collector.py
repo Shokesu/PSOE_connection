@@ -49,7 +49,7 @@ def collect_tweets(out_file_path):
                 def run(self):
                     self.tweet['sources'] = self.tweet.get_info_sources()
 
-            num_async_workers = 8
+            num_async_workers = 16
             for i in range(0, len(tweets), num_async_workers):
                 workers = []
                 for j in range(i, min(len(tweets), i + num_async_workers)):
