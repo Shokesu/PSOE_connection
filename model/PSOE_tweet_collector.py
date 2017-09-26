@@ -36,8 +36,11 @@ def collect_tweets(out_file_path):
     num_tweets = 100 # Número de tweets por request
     while True:
         for candidate, query in queries.items():
+            # Hacemos la request a elasticsearch
             tweets = collector.search_tweets(query, first_tweet=tweet_offset, num_tweets = num_tweets)
 
+
+            # Procesamos los tweets
             class AsyncTweetWorker(Thread):
                 def __init__(self, tweet):
                     super().__init__()
@@ -57,6 +60,8 @@ def collect_tweets(out_file_path):
                 for worker in workers:
                     worker.join()
 
+            # Filtramos los tweets (si no hacen mención a ninguna fuente externa de información
+            # los descartamos
             tweets = [tweet for tweet in tweets if len(tweet['sources']) > 0]
 
             for tweet in tweets:
@@ -64,6 +69,9 @@ def collect_tweets(out_file_path):
 
             print('Recollected {} tweets'.format(len(tweets)))
 
+
+
+            # Almacenamos los tweets en un fichero externo.
             with open(out_file_path, 'a') as tweet_file_handler:
                 for tweet in tweets:
                     print(json.dumps(tweet), file = tweet_file_handler)
