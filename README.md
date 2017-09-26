@@ -21,7 +21,7 @@
 
 
 
-Como muestra,  aqui están los resultados de la visualización de los tweets (usando 433 tweets pero descartando retweets):
+Como muestra,  aqui están los resultados de la visualización de los tweets (usando alrededor de 1000 tweets, pero descartando retweets):
 
 
 ![Alt text](/images/grafico1.png?raw=true "Optional Title")
