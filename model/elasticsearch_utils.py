@@ -3,6 +3,7 @@ from datetime import datetime
 from re import match
 
 from elasticsearch import Elasticsearch
+from elasticsearch.exceptions import ConnectionTimeout
 from elasticsearch_dsl import Search
 from elasticsearch_dsl.query import Match, Term
 
@@ -38,9 +39,14 @@ class ElasticSearchCollector:
 
         request = Search(index = 'shokesu', doc_type = 'posts')
         request = request[first_doc:first_doc+num_docs]
-        result = request.using(client = self.client).query(query).execute(ignore_cache = False)
-        if not result.success():
-            raise Exception()
+        while True:
+            try:
+                result = request.using(client = self.client).query(query).execute(ignore_cache = False)
+                if not result.success():
+                    raise Exception()
+                break
+            except ConnectionTimeout:
+                pass
 
         data = result.to_dict()
         docs = data['hits']['hits']
