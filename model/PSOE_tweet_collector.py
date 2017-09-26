@@ -5,6 +5,7 @@ from model.tweet import Tweet
 from collections import namedtuple
 import json
 from time import sleep
+from threading import Thread
 
 
 def collect_tweets(out_file_path):
@@ -36,13 +37,38 @@ def collect_tweets(out_file_path):
     while True:
         for candidate, query in queries.items():
             tweets = collector.search_tweets(query, first_tweet=tweet_offset, num_tweets = num_tweets)
+
+            class AsyncTweetWorker(Thread):
+                def __init__(self, tweet):
+                    super().__init__()
+                    self.tweet = tweet
+
+                def run(self):
+                    self.tweet['sources'] = self.tweet.get_info_sources()
+
+            num_async_workers = 8
+            for i in range(0, len(tweets), num_async_workers):
+                workers = []
+                for j in range(i, min(len(tweets), i + num_async_workers)):
+                    worker = AsyncTweetWorker(tweets[j])
+                    worker.start()
+                    workers.append(worker)
+
+                for worker in workers:
+                    worker.join()
+
+            tweets = [tweet for tweet in tweets if len(tweet['sources']) > 0]
+
             for tweet in tweets:
                 tweet['candidate'] = candidate
-                tweet['sources'] = tweet.get_info_sources()
-                if len(tweet['sources']) == 0:
-                    continue
-                with open(out_file_path, 'a') as tweet_file_handler:
+
+            print('Recollected {} tweets'.format(len(tweets)))
+
+            with open(out_file_path, 'a') as tweet_file_handler:
+                for tweet in tweets:
                     print(json.dumps(tweet), file = tweet_file_handler)
+
+
 
         tweet_offset += num_tweets
 
