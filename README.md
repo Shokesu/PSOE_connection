@@ -1,8 +1,8 @@
 # PSOE_connection
-1. Instalación
-    - Se necesita la versión 3 de python o posterior
-    - Se debe instalar las siguientes dependencias: elasticsearch, elasticsearch_dsl, requests
-    - Para visualizar el notebook, se necesita ipython y pandas. Opcionalmente se puede instalar jupyter 
+1. Instalación:
+Se necesita la versión 3 de python o posterior
+Se debe instalar las siguientes dependencias: **elasticsearch, elasticsearch_dsl, requests**
+Para visualizar los notebooks, se necesita **ipython y pandas**. Opcionalmente se puede instalar **jupyter** 
     
 
 2. Instrucciones de uso.
