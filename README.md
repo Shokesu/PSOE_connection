@@ -1,6 +1,11 @@
 # PSOE_connection
+1. Instalación
+    - Se necesita la versión 3 de python o posterior
+    - Se debe instalar las siguientes dependencias: elasticsearch, elasticsearch_dsl, requests
+    - Para visualizar el notebook, se necesita ipython y pandas. Opcionalmente se puede instalar jupyter 
+    
 
-1. Instrucciones de uso.
+2. Instrucciones de uso.
 
     Para empezar a recolectar tweets, ejecutar el script **model/PSOE_tweet_collector.py**
     Este script realizará consultas a la base de datos ElasticSeach para obtener los tweets que satisfagan los siguientes
@@ -12,7 +17,7 @@
     JSON.
 
 
-2. Para visualizar los datos, abrir el notebook en **view/visualize_data.ipynb** con IPython o Jupyter.
+3. Para visualizar los datos, abrir el notebook en **view/visualize_data.ipynb** con IPython o Jupyter.
   Al ejecutarlo, se generarán una serie de gráficos:
     - Gráfico que muestra el número de tweets que mencionan a cada candidato del PSOE (Sanchez, Patxi y Susana)
     - Gráfico que visualiza las fuentes de información externas más referenciadas en estos tweets.
